@@ -13,10 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-//@Service  // Enable (uncomment here) this component and disable the JPAQueryHandler if you want to use In-memory version
+@Service
 @ProcessingGroup("orderStatus")
-public class InMemoryOrderStatusQueryHandler {
+public class OrderStatusQueryHandler {
 
     private final Map<Long, OrderStatus> data = new HashMap<>();
 
@@ -40,8 +39,8 @@ public class InMemoryOrderStatusQueryHandler {
 
 
     @EventHandler
-    public void on(OrderDeliveryStartedEvent orderDeliveryStarted) {
-        OrderStatus orderStatus = data.getOrDefault(orderDeliveryStarted.getId(), null);
+    public void on(DeliveryStartedEvent deliveryStarted) {
+        OrderStatus orderStatus = data.getOrDefault(deliveryStarted.getOrderId(), null);
 
         if( orderStatus != null) {
                 
