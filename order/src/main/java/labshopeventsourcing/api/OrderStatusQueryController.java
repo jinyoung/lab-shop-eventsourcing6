@@ -21,7 +21,7 @@ public class OrderStatusQueryController {
   }
   
 
-  @GetMapping("/orderStatuses")
+  @GetMapping("/orderStatuses_")
   public CompletableFuture<List<OrderStatus>> findAll() {
       return queryGateway.query(new OrderStatusQuery(), ResponseTypes.multipleInstancesOf(OrderStatus.class));
   }
