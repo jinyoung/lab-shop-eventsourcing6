@@ -1,13 +1,15 @@
 package labshopeventsourcing.event;
 
-
-
-
 import lombok.Data;
 import lombok.ToString;
 
-@ToString
+
+
+
+//
+
 @Data
+@ToString
 public class OrderPlacedEvent {
 
     private Long id;
@@ -19,3 +21,4 @@ public class OrderPlacedEvent {
     private String address;
 
 }
+//

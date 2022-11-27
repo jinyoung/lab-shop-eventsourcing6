@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 import labshopeventsourcing.command.*;
 import labshopeventsourcing.event.*;
 
+//
 @Aggregate
 @Data
 @ToString
@@ -67,24 +68,29 @@ public class OrderAggregate {
 
 
 
+//
 
     @EventSourcingHandler
     public void on(OrderPlacedEvent event) {
         BeanUtils.copyProperties(event, this);
     }
 
+//
 
     @EventSourcingHandler
     public void on(OrderCancelledEvent event) {
         BeanUtils.copyProperties(event, this);
     }
 
+//
 
     @EventSourcingHandler
     public void on(OrderDeliveryStartedEvent event) {
         BeanUtils.copyProperties(event, this);
     }
 
+//
 
 }
+//
 

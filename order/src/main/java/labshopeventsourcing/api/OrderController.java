@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.http.HttpEntity;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -20,6 +24,7 @@ import java.util.concurrent.CompletableFuture;
 import labshopeventsourcing.aggregate.*;
 import labshopeventsourcing.command.*;
 
+//
 @RestController
 public class OrderController {
 
@@ -39,7 +44,20 @@ public class OrderController {
       System.out.println("##### /order/order  called #####");
 
       // send command
-      return commandGateway.send(orderCommand);
+      return commandGateway.send(orderCommand)            
+            .thenApply(
+            id -> {
+                   resource = new ();
+                  resource.setId(id);
+                  
+                  EntityModel<> model = EntityModel.of(resource);
+                  model
+                        .add(Link.of("//" + resource.getId()).withSelfRel());
+
+                  return new ResponseEntity<>(model, HttpStatus.OK);
+            }
+      );
+
   }
 
 
@@ -51,7 +69,20 @@ public class OrderController {
       System.out.println("##### /order/cancel  called #####");
 
       // send command
-      return commandGateway.send(cancelCommand);
+      return commandGateway.send(cancelCommand)            
+            .thenApply(
+            id -> {
+                   resource = new ();
+                  resource.setId(id);
+                  
+                  EntityModel<> model = EntityModel.of(resource);
+                  model
+                        .add(Link.of("//" + resource.getId()).withSelfRel());
+
+                  return new ResponseEntity<>(model, HttpStatus.OK);
+            }
+      );
+
   }
 
 
@@ -67,3 +98,4 @@ public class OrderController {
       return commandGateway.send(updateStatusCommand);
   }
 }
+//

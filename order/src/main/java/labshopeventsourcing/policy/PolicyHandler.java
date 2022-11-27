@@ -19,6 +19,8 @@ import labshopeventsourcing.command.*;
 import labshopeventsourcing.event.*;
 import labshopeventsourcing.aggregate.*;
 
+//
+//
 
 @Service
 @ProcessingGroup("order")
@@ -37,3 +39,5 @@ public class PolicyHandler{
     }
 
 }
+//
+//
